@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TITLE</title>
+    <link rel="stylesheet" href="assets/styles/style.css">
+    <style>
+        textarea {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<!-- HEADER -->
+    <header>
+    </header>
+<!-- MAIN -->
+    <main>
+        <h1>Eingabe</h1>
+        <button id="ver" onclick="vers()">Verschlüsseln</button>
+        <button id="ent" onclick="ents()">Entschlüsseln</button>
+        <label for="">Verschiebung</label>
+        <select name="" id="schieb">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3" selected>3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+        </select>
+        <textarea name="" id="txt1" cols="30" rows="10"></textarea>
+        <h1>Ausgabe</h1>
+        <textarea name="" id="txt2" cols="30" rows="10"></textarea>
+    </main>
+<!-- SCRIPT -->
+    <script>
+        let ver = document.getElementById('ver')
+        let ent = document.getElementById('ent')
+        let schieb = document.getElementById('schieb')
+        let txt1 = document.getElementById('txt1')
+        let txt2 = document.getElementById('txt2')
+        let alph = 'abcdefghijklmnopqrstuvwxyz'
+        var na = ''
+        var res = ''
+
+        function nalp() {
+            na = ''
+            let st = Number(schieb.value)
+            for (; st < alph.length; st ++) {
+                na += alph[st]
+            }
+            st = Number(schieb.value)
+            let sli = alph.slice(0,st)
+            na += sli
+        }
+        
+        // wikipedia
+        // ZLNLSHGLD
+        function vers() {
+            txt2.value = ''
+            txt1.value = txt1.value.toLowerCase()
+            nalp()
+            for (let i = 0; i < (txt1.value).length; i++) {
+                if ((txt1.value)[i] == ' ') {
+                        txt2.value += ' '
+                    }
+                for (let x = 0; x <alph.length; x++) {
+                    if ((txt1.value)[i] == alph[x]) {
+                        txt2.value += na[x]
+                    }
+                }
+            }
+            txt2.value = txt2.value.toUpperCase()
+        }
+
+        function ents() {
+            txt2.value = ''
+            txt1.value = txt1.value.toLowerCase()
+            nalp()
+            for (let i = 0; i < (txt1.value).length; i++) {
+                if ((txt1.value)[i] == ' ') {
+                        txt2.value += ' '
+                    }
+                for (let x = 0; x <na.length; x++) {
+                    if ((txt1.value)[i] == na[x]) {
+                        txt2.value += alph[x]
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
